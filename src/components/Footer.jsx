@@ -47,7 +47,7 @@ export default function Footer() {
               <a href="tel:+525532499504">📞 (55) 3249 9504</a>
             </li>
             <li>
-              <a href="mailto:contacto@itcare.com.mx">✉️ contacto@itcare.com.mx</a>
+              <a href="mailto:jua.diaz@itcare.com.mx">✉️ jua.diaz@itcare.com.mx</a>
             </li>
             <li>
               <a href="https://wa.me/525532499504" target="_blank" rel="noopener noreferrer">
