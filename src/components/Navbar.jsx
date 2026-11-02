@@ -18,8 +18,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar-inner">
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
-          <span className="navbar-logo-mark">IT</span>
-          <span className="navbar-logo-text">Care</span>
+          <img src="/logo-white.svg" alt="ITCare" className="navbar-logo-img" />
         </Link>
 
         <button

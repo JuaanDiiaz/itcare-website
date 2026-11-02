@@ -7,8 +7,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div>
           <div className="footer-logo">
-            <span className="navbar-logo-mark">IT</span>
-            <span className="navbar-logo-text">Care</span>
+            <img src="/logo-white.svg" alt="ITCare" className="footer-logo-img" />
           </div>
           <p className="footer-tagline">{siteInfo.tagline}</p>
         </div>
