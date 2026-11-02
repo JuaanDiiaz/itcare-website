@@ -56,7 +56,7 @@ export default function Privacy() {
               Usted tiene derecho a acceder, rectificar, cancelar u oponerse al
               tratamiento de sus datos personales, así como a limitar su uso o
               revocar el consentimiento otorgado. Para ejercer estos derechos,
-              envíe su solicitud a <strong>privacidad@itcare.com.mx</strong> y le
+              envíe su solicitud a <strong>jua.diaz@itcare.com.mx</strong> y le
               responderemos en un plazo máximo de 20 días hábiles.
             </p>
 
