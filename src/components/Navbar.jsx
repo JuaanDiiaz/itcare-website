@@ -6,7 +6,8 @@ const links = [
   { to: '/', label: 'Inicio' },
   { to: '/services', label: 'Servicios' },
   { to: '/technologies', label: 'Tecnologías' },
-  { to: '/solutions', label: 'Soluciones de Negocio' },
+  { to: '/resources', label: 'Recursos' },
+  { to: '/solutions', label: 'Soluciones' },
   { to: '/contact', label: 'Contacto' },
 ]
 

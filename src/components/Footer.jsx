@@ -26,26 +26,46 @@ export default function Footer() {
               <NavLink to="/technologies">Tecnologías</NavLink>
             </li>
             <li>
+              <NavLink to="/resources">Recursos</NavLink>
+            </li>
+            <li>
               <NavLink to="/solutions">Soluciones de Negocio</NavLink>
             </li>
             <li>
               <NavLink to="/contact">Contacto</NavLink>
+            </li>
+            <li>
+              <NavLink to="/privacy">Aviso de Privacidad</NavLink>
             </li>
           </ul>
         </nav>
 
         <div>
           <h4>Contacto</h4>
-          <p>
-            <Link to="/contact" className="footer-cta">
-              Contacte a un especialista
-            </Link>
-          </p>
+          <ul className="footer-links footer-contact">
+            <li>
+              <a href="tel:+525532499504">📞 (55) 3249 9504</a>
+            </li>
+            <li>
+              <a href="mailto:contacto@itcare.com.mx">✉️ contacto@itcare.com.mx</a>
+            </li>
+            <li>
+              <a href="https://wa.me/525532499504" target="_blank" rel="noopener noreferrer">
+                💬 WhatsApp
+              </a>
+            </li>
+            <li>📍 Ciudad de México, México</li>
+          </ul>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>{siteInfo.copyright}</p>
+        <p>
+          {siteInfo.copyright} ·{' '}
+          <Link to="/privacy" className="footer-privacy-link">
+            Aviso de Privacidad
+          </Link>
+        </p>
       </div>
     </footer>
   )

@@ -1,17 +1,21 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 import ScrollUI from './components/ScrollUI'
+import Analytics from './components/Analytics'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import Technologies from './pages/Technologies'
 import Solutions from './pages/Solutions'
+import Resources from './pages/Resources'
+import Article from './pages/Article'
+import Privacy from './pages/Privacy'
 import Contact from './pages/Contact'
 
 // Scrolls back to the top whenever the route changes; otherwise the new page
-// keeps the previous scroll position. Uses 'instant' — the CSS
+// keeps the previous scroll position. Uses 'instant' - the CSS
 // `scroll-behavior: smooth` would otherwise animate this and make every page
 // change look like the content "slides up from below".
 function ScrollToTop() {
@@ -31,6 +35,7 @@ function Layout() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <Analytics />
       <ScrollUI />
     </div>
   )
@@ -46,6 +51,9 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/technologies" element={<Technologies />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/:slug" element={<Article />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/contact" element={<Contact />} />
           {/* Unknown URLs fall back to home */}
           <Route path="*" element={<Home />} />
