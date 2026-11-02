@@ -5,13 +5,15 @@
   --panel: rgba(255, 255, 255, 0.045);
   --panel-strong: rgba(255, 255, 255, 0.07);
   --border: rgba(148, 163, 233, 0.16);
-  --border-glow: rgba(56, 189, 248, 0.45);
+  --border-glow: rgba(90, 130, 248, 0.45);
   --text: #e7ecff;
   --muted: #94a2c4;
-  --primary: #4f7dff;
-  --primary-dark: #3b63d9;
-  --accent: #38e1ff;
-  --glow: 0 0 28px rgba(79, 125, 255, 0.35);
+  /* Brand-derived palette: logo navy #0D347A lightened for dark UI */
+  --primary: #3b63d9;
+  --primary-dark: #2c4fa9;
+  --brand-navy: #0d347a;
+  --accent: #6ea8ff;
+  --glow: 0 0 28px rgba(59, 99, 217, 0.4);
   --radius: 14px;
   --container: 1100px;
   --font-sans: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
@@ -78,9 +80,9 @@ img {
 /* ---------- Buttons (neon gradient) ---------- */
 .button {
   display: inline-block;
-  background: linear-gradient(135deg, var(--primary) 0%, #2f8fe0 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #5e85f5 100%);
   color: #fff;
-  border: 1px solid rgba(122, 162, 255, 0.5);
+  border: 1px solid rgba(122, 150, 255, 0.5);
   border-radius: 10px;
   padding: 12px 26px;
   font-family: inherit;
@@ -804,6 +806,79 @@ img {
   margin: 0 auto 26px;
   color: var(--muted);
   font-size: 1.05rem;
+}
+
+/* ---------- Floating WhatsApp button ---------- */
+.whatsapp-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 150;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 26px rgba(37, 211, 102, 0.45);
+}
+
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
+
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  z-index: 200;
+  transition: width 0.1s linear;
+}
+
+/* ---------- Back to top ---------- */
+.back-to-top {
+  position: fixed;
+  left: 22px;
+  bottom: 22px;
+  z-index: 150;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(4, 8, 18, 0.85);
+  color: var(--accent);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow);
 }
 
 /* ---------- Footer ---------- */

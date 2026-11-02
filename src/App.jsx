@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import WhatsAppButton from './components/WhatsAppButton'
+import ScrollUI from './components/ScrollUI'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import Technologies from './pages/Technologies'
@@ -28,6 +30,8 @@ function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <WhatsAppButton />
+      <ScrollUI />
     </div>
   )
 }
