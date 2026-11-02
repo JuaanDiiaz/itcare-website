@@ -1,7 +1,7 @@
-// Floating WhatsApp contact button. The number is a placeholder until the
-// real one is provided — update `whatsapp` in src/data/content.js.
+// Floating WhatsApp contact button.
+// Real company number: 55 3249 9504 → wa.me format: 52 + 10 digits.
 export default function WhatsAppButton() {
-  const number = import.meta.env.VITE_WHATSAPP_NUMBER || '5215500000000'
+  const number = import.meta.env.VITE_WHATSAPP_NUMBER || '525532499504'
   const href = `https://wa.me/${number}?text=${encodeURIComponent(
     'Hola ITCare, me interesa una consultoría.',
   )}`
