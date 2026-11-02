@@ -1,0 +1,20 @@
+# SPA routing for the React app on Apache (GoDaddy cPanel).
+# Any unknown path is served by index.html so React Router can handle it.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /beta/
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /beta/index.html [L]
+</IfModule>
+
+# Sensible caching for hashed build assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+</IfModule>

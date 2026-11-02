@@ -1,0 +1,199 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #111;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Estilos para menú responsive */
+
+.menu-toggle {
+    display: none; /* Ocultar botón de hamburguesa en pantallas grandes */
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu li {
+    margin: 0 10px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Mostrar botón de hamburguesa en dispositivos móviles */
+        cursor: pointer;
+        color: white;
+        font-size: 1.5em;
+    }
+    
+    .menu {
+        display: none; /* Ocultar menú en dispositivos móviles por defecto */
+        flex-direction: column;
+        background-color: #111;
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .menu.active {
+        display: flex; /* Mostrar menú cuando se hace clic en el botón de hamburguesa */
+    }
+    
+    .menu li {
+        margin: 10px 0;
+    }
+}
+
+main {
+    padding-top: 60px; /* To account for fixed header */
+}
+
+.hero {
+    background: url('background.jpg') no-repeat center center/cover;
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-images img {
+    width: 45%;
+    margin: 10px;
+}
+
+.hero-descriptions p {
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+.modules {
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.module {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex: 1 1 30%;
+    max-width: 30%;
+    text-align: left;
+}
+
+.module h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.module p {
+    font-size: 1.1em;
+}
+
+.services, .integrated-services, .business-solutions {
+    padding: 20px;
+}
+
+.services h2, .integrated-services h2, .business-solutions h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.services p, .integrated-services p, .business-solutions p {
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+.services h3, .integrated-services h3, .business-solutions h3 {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.services ul, .integrated-services ul, .business-solutions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.services ul li, .integrated-services ul li, .business-solutions ul li {
+    background: #e0e0e0;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+/* Estilo mejorado para listas */
+
+.services ul,
+.integrated-services ul,
+.business-solutions ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px; /* Espacio adicional arriba de las listas */
+}
+
+.services ul li,
+.integrated-services ul li,
+.business-solutions ul li {
+    background-color: #f9f9f9;
+    border-left: 4px solid #3498db; /* Color del borde izquierdo */
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+.services ul li:last-child,
+.integrated-services ul li:last-child,
+.business-solutions ul li:last-child {
+    margin-bottom: 0; /* Elimina el margen inferior del último elemento */
+}
+
+.services ul li:before,
+.integrated-services ul li:before,
+.business-solutions ul li:before {
+    content: "\2022"; /* Código Unicode para el punto (•) */
+    color: #3498db; /* Color del punto */
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em; /* Alineación del punto */
+}
