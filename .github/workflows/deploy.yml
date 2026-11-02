@@ -46,6 +46,8 @@ jobs:
           name: dist
           path: dist
           retention-days: 7
+          # v4 skips dotfiles by default, which would drop public/.htaccess
+          include-hidden-files: true
 
   deploy:
     name: Publish built site to deploy branch
