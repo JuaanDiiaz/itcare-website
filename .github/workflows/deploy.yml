@@ -59,11 +59,8 @@ jobs:
           name: dist
           path: dist
 
-      - name: Include .htaccess in the published tree
-        working-directory: ${{ github.workspace }}
-        # public/.htaccess is excluded from dist by Vite; copy it in so the
-        # published branch is self-contained.
-        run: cp public/.htaccess dist/.htaccess
+      # NOTE: Vite copies public/ (including .htaccess) into dist/ during
+      # build, so the artifact already contains it.
 
       - name: Push dist/ to the deploy branch
         uses: peaceiris/actions-gh-pages@v4
