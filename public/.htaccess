@@ -1,13 +1,14 @@
-# SPA routing for the React app on Apache (GoDaddy cPanel).
-# Any unknown path is served by index.html so React Router can handle it.
+# SPA routing for the React app on Apache (GoDaddy/Plesk).
+# The site is served from its own document root (subdomain) with Vite's
+# default base '/', so any unknown path must be served by index.html.
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /beta/
+  RewriteBase /
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /beta/index.html [L]
+  RewriteRule . /index.html [L]
 </IfModule>
 
 # Sensible caching for hashed build assets

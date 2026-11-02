@@ -1,16 +1,11 @@
 # ITCare website CI/CD
 #
 # - PRs: build check only (fast feedback, nothing is deployed)
-# - push to main: build + deploy dist/ to GoDaddy beta path via FTP/SFTP
+# - push to main: build + publish the built site to the 'deploy' branch.
+#   Plesk (beta.itcare.com.mx) pulls the 'deploy' branch via its Git extension,
+#   so the server only ever serves built files, never source code.
 #
-# Required repository secrets (Settings > Secrets and variables > Actions):
-#   FTP_SERVER    - e.g. ftp.itcare.com.mx
-#   FTP_USERNAME  - FTP/cPanel user
-#   FTP_PASSWORD  - FTP password
-#   FTP_PATH      - e.g. /public_html/beta (leading slash, no trailing slash)
-#
-# The beta build uses --base=/beta/ so Vite emits asset URLs relative to the
-# beta subfolder (matches the RewriteBase in public/.htaccess).
+# No FTP or server secrets are needed: publishing uses the built-in GITHUB_TOKEN.
 
 name: CI/CD
 
@@ -23,6 +18,9 @@ on:
 concurrency:
   group: deploy-production
   cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -39,42 +37,39 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build (beta base path)
-        run: npm run build -- --base=/beta/
+      - name: Build
+        run: npm run build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dist-beta
+          name: dist
           path: dist
           retention-days: 7
 
   deploy:
-    name: Deploy to GoDaddy (beta)
+    name: Publish built site to deploy branch
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    environment: beta
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: dist-beta
+          name: dist
           path: dist
 
-      - name: Upload .htaccess into dist
+      - name: Include .htaccess in the published tree
         working-directory: ${{ github.workspace }}
         # public/.htaccess is excluded from dist by Vite; copy it in so the
-        # uploaded tree is self-contained.
+        # published branch is self-contained.
         run: cp public/.htaccess dist/.htaccess
 
-      - name: Deploy via FTP/SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Push dist/ to the deploy branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_PATH }}/
-          # Never clean the beta directory; we redeploy full trees manually
-          dangerous-clean-slate: false
-          protocol: ftps
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: deploy
+          publish_dir: ./dist
+          force_orphan: true
+          commit_message: "Deploy ${{ github.sha }}"
