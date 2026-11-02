@@ -1,0 +1,80 @@
+# ITCare website CI/CD
+#
+# - PRs: build check only (fast feedback, nothing is deployed)
+# - push to main: build + deploy dist/ to GoDaddy beta path via FTP/SFTP
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   FTP_SERVER    - e.g. ftp.itcare.com.mx
+#   FTP_USERNAME  - FTP/cPanel user
+#   FTP_PASSWORD  - FTP password
+#   FTP_PATH      - e.g. /public_html/beta (leading slash, no trailing slash)
+#
+# The beta build uses --base=/beta/ so Vite emits asset URLs relative to the
+# beta subfolder (matches the RewriteBase in public/.htaccess).
+
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (beta base path)
+        run: npm run build -- --base=/beta/
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-beta
+          path: dist
+          retention-days: 7
+
+  deploy:
+    name: Deploy to GoDaddy (beta)
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: beta
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-beta
+          path: dist
+
+      - name: Upload .htaccess into dist
+        working-directory: ${{ github.workspace }}
+        # public/.htaccess is excluded from dist by Vite; copy it in so the
+        # uploaded tree is self-contained.
+        run: cp public/.htaccess dist/.htaccess
+
+      - name: Deploy via FTP/SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_PATH }}/
+          # Never clean the beta directory; we redeploy full trees manually
+          dangerous-clean-slate: false
+          protocol: ftps
