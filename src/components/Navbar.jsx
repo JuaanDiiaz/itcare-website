@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import logoWhite from '../assets/logo-white.svg'
 
 const links = [
   { to: '/', label: 'Inicio' },
@@ -18,7 +19,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar-inner">
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
-          <img src="/logo-white.svg" alt="ITCare" className="navbar-logo-img" />
+          <img src={logoWhite} alt="ITCare" className="navbar-logo-img" />
         </Link>
 
         <button

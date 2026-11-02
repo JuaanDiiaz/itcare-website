@@ -1,5 +1,6 @@
 import { NavLink, Link } from 'react-router-dom'
 import { siteInfo } from '../data/content'
+import logoWhite from '../assets/logo-white.svg'
 
 export default function Footer() {
   return (
@@ -7,7 +8,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div>
           <div className="footer-logo">
-            <img src="/logo-white.svg" alt="ITCare" className="footer-logo-img" />
+            <img src={logoWhite} alt="ITCare" className="footer-logo-img" />
           </div>
           <p className="footer-tagline">{siteInfo.tagline}</p>
         </div>
