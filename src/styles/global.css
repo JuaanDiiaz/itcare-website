@@ -678,6 +678,9 @@ img {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 11px 13px;
+  width: 100%;
+  min-width: 0; /* allows shrinking below the select's intrinsic width on
+                   narrow screens (320px devices) */
 }
 
 .form-field select option {
@@ -752,6 +755,13 @@ img {
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
+  }
+}
+
+/* Very narrow phones: tighten paddings so the form never overflows */
+@media (max-width: 400px) {
+  .form-panel {
+    padding: 18px;
   }
 }
 
