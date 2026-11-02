@@ -1,4 +1,5 @@
 // Site-wide content in one place so copy stays consistent across pages.
+// (Edited to trigger the webhook end-to-end deployment test.)
 
 import heroBg from '../assets/hero-bg.jpg'
 import servSap from '../assets/serv-sap.jpg'
